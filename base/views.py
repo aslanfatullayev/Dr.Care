@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from .models import News
 
 def home(request):
     return render(request, 'pages/home.html')
@@ -16,8 +18,20 @@ def pricing(request):
     return render(request, 'pages/pricing.html')
 
 def blog(request):  
-    return render(request, 'pages/blog.html')
+    posts = News.objects.all()
+    context = {
+        'News': posts
+    }
+    return render(request, 'pages/blog.html', context)
 
 def contact(request):           
     return render(request, 'pages/contact.html')
+
+def blog_list(request):
+    return render(request, 'pages/blog-list.html')
+
+
+class NewsView(ListView):
+    model = News
+    template_name = 'blog.html'
 
