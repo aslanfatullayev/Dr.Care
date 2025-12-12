@@ -19,3 +19,17 @@ class News(models.Model):
     class Meta:
         verbose_name = "News"
         verbose_name_plural = "News"
+        
+
+class ContactInfo(models.Model):
+    address = models.CharField(max_length=250)
+    phone = models.CharField(max_length=100)
+    email = models.EmailField()
+    website = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name = "Contact info"
+        verbose_name_plural = "Contact info"
+
+    def __str__(self):
+        return "Contacts"

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import News
+from .models import News, ContactInfo
 
 def home(request):
     return render(request, 'pages/home.html')
@@ -24,11 +24,6 @@ class Blog(ListView):
     context_object_name = "News"
     
 
-
-def contact(request):           
-    return render(request, 'pages/contact.html')
-
-
 class BlogDetailView(DetailView):
     model = News
     template_name = 'pages/blog-list.html'
@@ -37,6 +32,10 @@ class BlogDetailView(DetailView):
 class NewsView(ListView):
     model = News
     template_name = 'blog.html'
+
+def contacts(request):
+    info = ContactInfo.objects.first()
+    return render(request, 'pages/contact.html', {'info':info})
 
 
 
